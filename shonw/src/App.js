@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+// import { react } from "React";
+import React from "react";
+import "./App.css";
+const key = "563492ad6f917000010000019f59e318eece45ada47edcfbeb0ad8ea";
+
+const fetchUrl = async () => {
+  const data = await fetch(key, {});
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">Ali</header>
     </div>
   );
 }
