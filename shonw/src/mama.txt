@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
+// import p1 from "./data/huy-nguyen-DRMUcPC0JXc-unsplash.jpg";
 import data from "./data/data";
 import "./flexboxgrid-6.3.1/css/flexboxgrid.css";
 const key = "563492ad6f91700001000001e12e6de3d88c4d2f93b8cb6da45c5793";
 const api_Url = "https://api.pexels.com/v1/search?query=interior&per_page=25";
-
 function App() {
   const [image, setImage] = useState([]);
-  const [isee, setIsee] = useState(null);
-  const Imref = useRef(null);
+  const [isee, setIsee] = useState();
   const refurd = useRef(null);
   const fetchUrl = async () => {
     const data = await fetch(api_Url, { headers: { Authorization: key } });
@@ -25,8 +24,34 @@ function App() {
     };
     fetchImages();
   }, []);
-  console.log(image);
+  const mamad = (e) => {
+    // console.log(e.target);
+    // if (e.target.className === "image_container") {
+    //   e.target.className = "image_container image_container_hover";
+    // }
+    // if (e.target.className === "trest") {
+    //   console.log("trest");
+    // }
+  };
+  const mama = (e) => {
+    console.log(refurd.current.getBoundingClientRect().width);
+    const rect = e.target.getBoundingClientRect();
+    const center = (rect.left + rect.right) / 2;
+    console.log(rect);
+    console.log(rect.right);
+    // 657.5
+    // console.log((Math.floor(rect.left) + Math.floor(rect.right)) / 2);
+    // console.log(rect);
+    console.log(refurd.current.getBoundingClientRect().width / 1.13);
+    // console.log(window.outerWidth);
+    if (rect.right > refurd.current.getBoundingClientRect().width / 1.13) {
+      console.log("object");
+    }
+    // e.target.className = "image_container";
+    // e.target.style.cursor = "help";
+  };
   return (
+    // <div style={{ overflowY: "hidden", overflowX: "scroll" }}>
     <div className="big-con" ref={refurd}>
       <header className="App-header">
         <h1>Guess what have we done!!!</h1>
@@ -34,18 +59,21 @@ function App() {
 
       <div
         className="vaed"
-        //         // style={{ display: "flex", overflowY: "hidden", overflowX: "scroll" }}
+        // style={{ display: "flex", overflowY: "hidden", overflowX: "scroll" }}
       >
         {/* {image.map((e) => { */}
         {data.map((e) => {
-          console.log(e);
-          //   setIsee("e.id");
+          setIsee(e.id);
+          //   console.log(e.img);
           return (
-            <div className="iam">
-              {/* <div className="trest"></div>; */}
+            <div className="iam" key={e.id}>
+              <div className="trest"></div>
               <img
+                // onMouseOver={console.log(refurd.current)}
                 className="image_container"
                 key={e.id.toString()}
+                onClick={mama}
+                // src={e.src.original}
                 src={e.img}
                 alt=""
               />
@@ -53,10 +81,11 @@ function App() {
           );
         })}
       </div>
-
-      <div
-      //    class="col-xs-12 col-sm-8 col-md-6 col-lg-4"
-      >
+      <div>
+        {/* class="col-xs-12
+                col-sm-8
+                col-md-6
+                col-lg-4" */}
         <section className="section-articles">
           <div className="parent">
             <div className="d1">
