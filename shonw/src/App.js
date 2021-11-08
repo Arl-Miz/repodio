@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actions } from "./state/index";
 import "./App.css";
 import data from "./data/data";
 import "./flexboxgrid-6.3.1/css/flexboxgrid.css";
@@ -6,10 +9,14 @@ const key = "563492ad6f91700001000001e12e6de3d88c4d2f93b8cb6da45c5793";
 const api_Url = "https://api.pexels.com/v1/search?query=interior&per_page=25";
 
 function App() {
+  const dispatch = useDispatch();
+  const act = bindActionCreators(actions, dispatch);
   const [image, setImage] = useState([]);
   const [isee, setIsee] = useState(null);
-  const Imref = useRef(null);
   const refurd = useRef(null);
+  const state = useSelector((state) => state.account);
+  console.log(state);
+  console.log(act);
   const fetchUrl = async () => {
     const data = await fetch(api_Url, { headers: { Authorization: key } });
     const result = await data.json();
@@ -19,13 +26,13 @@ function App() {
     const fetchImages = async () => {
       const images = await fetchUrl();
       //   .then((e) => console.log(e))
-      console.log(images.photos);
+      //   console.log(images.photos);
       setImage(await images.photos);
       return images;
     };
     fetchImages();
   }, []);
-  console.log(image);
+  //   console.log(image);
   return (
     <div className="big-con" ref={refurd}>
       <header className="App-header">
@@ -38,17 +45,12 @@ function App() {
       >
         {/* {image.map((e) => { */}
         {data.map((e) => {
-          console.log(e);
+          //   console.log(e);
           //   setIsee("e.id");
           return (
-            <div className="iam">
+            <div className="iam" key={e.id.toString()}>
               {/* <div className="trest"></div>; */}
-              <img
-                className="image_container"
-                key={e.id.toString()}
-                src={e.img}
-                alt=""
-              />
+              <img className="image_container" src={e.img} alt="" />
             </div>
           );
         })}
