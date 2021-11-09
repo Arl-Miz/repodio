@@ -36,11 +36,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    //   console.log(accNum);
+    // console.log(accNum);
     console.log(accNum);
+    if (accNum !== 0) {
+      refurd.current.ClassName = "HI";
+      refurd.current.style.backgroundImage = `url(im/${accNum.id}.jpg)`;
+    } else {
+      console.log("hi");
+    }
   }, [accNum]);
   const backGroundChanger = () => {
-    const bckgrbd = refurd.current();
+    // refurd.current.classList.add("HI");
+    console.log(accNum.img);
   };
 
   //   console.log(image);
@@ -49,7 +56,8 @@ function App() {
       <section>
         <div
           className="mamad big-con "
-          style={{ backgroundImage: "url(/image.jpg)" }}
+          ref={refurd}
+          style={{ backgroundImage: "url(/im/7.jpg)" }}
         ></div>
         <div className="wtfBro">
           {/* <div className="big-con mamad "> */}
@@ -60,14 +68,20 @@ function App() {
             {/* {image.map((e) => { */}
             {data.map((e) => {
               //   setIsee("e.id");
+              //   console.log(e.img);
               return (
-                <div className="iam" key={e.id.toString()}>
+                <div
+                  className="iam"
+                  onClick={() => backGroundChanger()}
+                  key={e.id.toString()}
+                >
                   {/* <div className="trest"></div>; */}
                   <img
                     className="image_container"
                     src={e.img}
                     alt=""
-                    onClick={() => cNum(e.id)}
+                    onClick={() => cNum(e)}
+                    // onClick={()=>}
                   />
                 </div>
               );
