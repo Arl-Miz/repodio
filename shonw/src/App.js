@@ -27,8 +27,8 @@ function App() {
   useEffect(() => {
     const fetchImages = async () => {
       const images = await fetchUrl();
-      //   .then((e) => console.log(e))
-      //   console.log(images.photos);
+      // .then((e) => console.log(e))
+      //   console.log(images);
       setImage(await images.photos);
       return images;
     };
@@ -37,17 +37,18 @@ function App() {
 
   useEffect(() => {
     // console.log(accNum);
-    console.log(accNum);
+    // console.log(accNum);
     if (accNum !== 0) {
-      refurd.current.ClassName = "HI";
+      //   console.log("hi");
       refurd.current.style.backgroundImage = `url(im/${accNum.id}.jpg)`;
-    } else {
-      console.log("hi");
+
+      //   refurd.current.style.backgroundImage = `url(im/${accNum.id}.jpg)`;
     }
   }, [accNum]);
-  const backGroundChanger = () => {
+  const backGroundChanger = (e) => {
     // refurd.current.classList.add("HI");
-    console.log(accNum.img);
+    // refurd.current.style.backgroundImage = `url(${e.src.original})`;
+    // console.log(accNum.img);
   };
 
   //   console.log(image);
@@ -55,9 +56,12 @@ function App() {
     <div className="body">
       <section>
         <div
-          className="mamad big-con "
+          className="big-con "
           ref={refurd}
-          style={{ backgroundImage: "url(/im/7.jpg)" }}
+          //   style={{
+          //     backgroundImage:
+          //       " linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)) ,url('/im/7.jpg')",
+          //   }}
         ></div>
         <div className="wtfBro">
           {/* <div className="big-con mamad "> */}
@@ -67,21 +71,23 @@ function App() {
           <div className="vaed">
             {/* {image.map((e) => { */}
             {data.map((e) => {
-              //   setIsee("e.id");
-              //   console.log(e.img);
+              // setIsee("e.id");
+              // console.log(e.img);
               return (
                 <div
                   className="iam"
-                  onClick={() => backGroundChanger()}
+                  onClick={() => backGroundChanger(e)}
                   key={e.id.toString()}
                 >
                   {/* <div className="trest"></div>; */}
                   <img
                     className="image_container"
                     src={e.img}
+                    // src={e.src.original}
+                    // src={e.src.portrait}
+                    // alt={e.photographer}
                     alt=""
                     onClick={() => cNum(e)}
-                    // onClick={()=>}
                   />
                 </div>
               );
